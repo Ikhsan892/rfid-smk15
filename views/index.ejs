@@ -1,0 +1,41 @@
+<%- include('./layout')%>
+<div class="container mt-5">
+    <a class="btn btn-primary" href="/downloadExcel" role="button">Export ke Excel</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">User</th>
+            <th scope="col">ID Kartu</th>
+            <th scope="col">Status</th>
+            <th scope="col">Tanggal</th>
+        </tr>
+        </thead>
+        <tbody id="table_body">
+        <% absences.forEach((data) => {%>
+            <tr>
+                <td><%= data.user?.name %></td>
+                <td><%= data.idcard %></td>
+                <td><%= data.status %></td>
+                <td><%= data.tanggal %></td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function(){
+        const socket = io()
+
+        socket.on('absence', function(message) {
+            const data = JSON.parse(message)
+            $("#table_body").append(`
+                <tr>
+                    <td>${data.user}</td>
+                    <td>${data.idcard}</td>
+                    <td>${data.status}</td>
+                    <td>${new Date(data.tanggal).toString()}</td>
+                </tr>
+            `)
+        });
+    })
+</script>

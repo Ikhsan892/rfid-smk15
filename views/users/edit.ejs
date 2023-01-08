@@ -1,0 +1,24 @@
+<%- include('../layout')%>
+<div class="container mt-5">
+    <form action="/users/edit-user/<%= user.id %>" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="name" name="name" required value="<%= user.name %>">
+        </div>
+        <div class="mb-3">
+            <label for="idcard" class="form-label">ID Card</label>
+            <input type="text" class="form-control" id="idcard" name="idcard" aria-describedby="idcardhelp" required value="<%= user.idcard %>">
+            <div id="idcardhelp" class="form-text">Mohon Tap Kartu</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script>
+    $(document).ready(function(){
+        const socket = io()
+
+        socket.on('register_new_card', function(idcard) {
+            $("#idcard").val(idcard)
+        });
+    })
+</script>

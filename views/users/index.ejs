@@ -1,0 +1,28 @@
+<%- include('../layout')%>
+<div class="container mt-5">
+    <a class="btn btn-primary" href="/users/tambah-user" role="button">Tambah User</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nama User</th>
+            <th scope="col">ID Kartu</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% users.forEach(function(user,index) { %>
+            <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= user.name %></td>
+                <td><%= user.idcard %></td>
+                <td>
+                    <a class="btn btn-warning" href="/users/edit-user/<%= user.id %>" role="button">Edit User</a>
+                    <a class="btn btn-danger" href="/users/delete-user/<%= user.id %>" role="button">Delete User</a>
+                </td>
+            </tr>
+        <% }) %>
+
+        </tbody>
+    </table>
+</div>
