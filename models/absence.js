@@ -12,11 +12,11 @@ const Absence = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    status: {
-      type: DataTypes.STRING,
+    masuk: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
-    tanggal: {
+    pulang: {
       type: DataTypes.DATE,
       allowNull: false,
     },

@@ -7,6 +7,7 @@ const users = require("./controllers/users");
 const routes = (app) => {
   // report
   router.get("/", index.mainView);
+  router.get("/filter-data", index.filterData);
   // excel
   router.get("/downloadExcel", index.excel);
 

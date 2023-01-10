@@ -2,6 +2,17 @@
 <div class="container mt-5">
     <form action="/users/edit-user/<%= user.id %>" method="POST">
         <div class="mb-3">
+            <label for="nis" class="form-label">NIS</label>
+            <input type="text" class="form-control" id="nis" name="nis" maxlength="9" value="<%= user.nis %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="kelas" class="form-label">Kelas</label>
+            <select name="kelas" id="kelas" >
+                <option value="X TJKT 1" selected="<%= user.kelas == "X TJKT 1" %>">X TJKT 1</option>
+                <option value="X TJKT 2" selected="<%= user.kelas == "X TJKT 2" %>">X TJKT 2</option>
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="name" class="form-label">Nama</label>
             <input type="text" class="form-control" id="name" name="name" required value="<%= user.name %>">
         </div>

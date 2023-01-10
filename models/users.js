@@ -7,6 +7,14 @@ const Users = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    nis: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    kelas: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     idcard: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -1,7 +1,6 @@
 const { Users } = require("../models/users");
 exports.index = async (req, res) => {
   const users = await Users.findAll();
-
   return res.render("users/index", {
     users: users,
   });
@@ -38,19 +37,37 @@ exports.deleteUser = async (req, res) => {
   return res.redirect("/users");
 };
 
-exports.tambahUser = async (req, res) => {
-  console.log(req.body);
+exports.tambahUser = async (request, response) => {
+  console.log(request.body);
 
   const nemuIdcard = await Users.findOne({
-    where: { idcard: req.body.idcard },
+    where: { idcard: request.body.idcard },
   });
 
-  if (nemuIdcard) {
-    return res.render("users/tambah", {
-      error: "ID Card sudah terdaftar",
+  const nemuNis = await Users.findOne({
+    where: {
+      nis: request.body.nis,
+    },
+  });
+
+  // nis sudah digunakan
+  if (nemuNis) {
+    return response.render("users/tambah", {
+      error: "NIS sudah terdaftar",
     });
   }
 
-  await Users.create(req.body);
-  return res.redirect("/users");
+  // id card sudah digunakan
+  if (nemuIdcard) {
+    return response.render("users/tambah", {
+      error: "ID Card sudah terdaftar",
+    });
+  }
+  await Users.create({
+    nis: request.body.nis,
+    kelas: request.body.kelas,
+    name: request.body.name,
+    idcard: request.body.idcard,
+  });
+  return response.redirect("/users");
 };

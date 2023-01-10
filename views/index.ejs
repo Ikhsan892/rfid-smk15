@@ -1,22 +1,24 @@
 <%- include('./layout')%>
 <div class="container mt-5">
     <a class="btn btn-primary" href="/downloadExcel" role="button">Export ke Excel</a>
+    <input type="date" id="filter-tanggal-masuk" placeholder="-- Filter Tanggal Masuk --" />
+    <input type="date" id="filter-tanggal-keluar" placeholder="-- Filter Tanggal Keluar --" />
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">User</th>
             <th scope="col">ID Kartu</th>
-            <th scope="col">Status</th>
-            <th scope="col">Tanggal</th>
+            <th scope="col">Masuk</th>
+            <th scope="col">Pulang</th>
         </tr>
         </thead>
         <tbody id="table_body">
-        <% absences.forEach((data) => {%>
+        <% absences.forEach((data) => { %>
             <tr>
                 <td><%= data.user?.name %></td>
                 <td><%= data.idcard %></td>
-                <td><%= data.status %></td>
-                <td><%= data.tanggal %></td>
+                <td><%= data.masuk %></td>
+                <td><%= data.pulang %></td>
             </tr>
         <% }) %>
         </tbody>
@@ -26,6 +28,15 @@
     $(document).ready(function(){
         const socket = io()
 
+        $("#filter-tanggal-masuk,#filter-tanggal-keluar").on("change",function(event) {
+            $.ajax({
+                method : "GET",
+                url : "/filter-data?tanggal_masuk=" + $("#filter-tanggal-masuk").val() + "&tanggal_keluar=" + $("#filter-tanggal-keluar").val()
+            }).done(function (value) {
+                console.log(value)
+            })
+        })
+
         socket.on('absence', function(message) {
             const data = JSON.parse(message)
             $("#table_body").append(`
@@ -33,7 +44,8 @@
                     <td>${data.user}</td>
                     <td>${data.idcard}</td>
                     <td>${data.status}</td>
-                    <td>${new Date(data.tanggal).toString()}</td>
+                    <td>${new Date(data.masuk).toString()}</td>
+                    <td>${new Date(data.pulang).toString()}</td>
                 </tr>
             `)
         });

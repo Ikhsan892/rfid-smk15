@@ -1,6 +1,7 @@
 const { Absence } = require("../models/absence");
 const { Users } = require("../models/users");
 const exceljs = require("exceljs");
+const { Op } = require("sequelize");
 exports.mainView = async (req, res) => {
   const data = await Absence.findAll({
     include: Users,
@@ -10,7 +11,6 @@ exports.mainView = async (req, res) => {
     absences: data,
   });
 };
-
 exports.excel = async (req, res) => {
   const workbook = new exceljs.Workbook(); // Create a new workbook
   const worksheet = workbook.addWorksheet("My Users"); // New Worksheet
@@ -55,4 +55,22 @@ exports.excel = async (req, res) => {
       message: "Something went wrong",
     });
   }
+};
+
+exports.filterData = async (req, res) => {
+  const tanggal = req.query;
+  const data_absen = await Absence.findAll({
+    where: {
+      masuk: {
+        [Op.gte]:
+          tanggal.tanggal_masuk == "" ? new Date() : tanggal.tanggal_masuk,
+      },
+      pulang: {
+        [Op.lte]:
+          tanggal.tanggal_keluar == "" ? new Date() : tanggal.tanggal_keluar,
+      },
+    },
+  });
+
+  console.log(data_absen);
 };

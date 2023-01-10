@@ -7,12 +7,23 @@
 <div class="container mt-5">
     <form action="/users/tambah-user" method="POST">
         <div class="mb-3">
-            <label for="name" class="form-label">Nama</label>
+            <label for="nis" class="form-label">NIS</label>
+            <input type="text" class="form-control" id="nis" name="nis" maxlength="9" required>
+        </div>
+        <div class="mb-3">
+            <label for="kelas" class="form-label">Kelas</label>
+            <select name="kelas" id="kelas">
+                <option value="X TJKT 1">X TJKT 1</option>
+                <option value="X TJKT 2">X TJKT 2</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Nama Siswa</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="mb-3">
             <label for="idcard" class="form-label">ID Card</label>
-            <input type="text" class="form-control" id="idcard" name="idcard" aria-describedby="idcardhelp" required>
+            <input type="text" class="form-control" id="idcard" name="idcard" aria-describedby="idcardhelp" maxlength="11"  required>
             <div id="idcardhelp" class="form-text">Mohon Tap Kartu</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
