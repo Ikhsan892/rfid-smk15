@@ -12,7 +12,30 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Dumping database structure for rfid
+CREATE DATABASE IF NOT EXISTS `rfid` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `rfid`;
+
+-- Dumping structure for table rfid.absences
+CREATE TABLE IF NOT EXISTS `absences` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` int DEFAULT NULL,
+  `idcard` text NOT NULL,
+  `status` text NOT NULL,
+  `tanggal` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- Data exporting was unselected.
+
+-- Dumping structure for table rfid.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `idcard` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
