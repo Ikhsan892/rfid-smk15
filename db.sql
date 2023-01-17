@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS `absences` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userId` int DEFAULT NULL,
   `idcard` text NOT NULL,
-  `status` text NOT NULL,
-  `tanggal` datetime NOT NULL,
+  `masuk` datetime DEFAULT NULL,
+  `pulang` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
@@ -33,9 +33,13 @@ CREATE TABLE IF NOT EXISTS `absences` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
-  `idcard` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  `idcard` varchar(9) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `nis` varchar(9) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `kelas` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idcard` (`idcard`),
+  UNIQUE KEY `nis` (`nis`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- Data exporting was unselected.
 
